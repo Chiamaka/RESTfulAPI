@@ -7,14 +7,10 @@ class Api::CribsController < ApplicationController
   def create
     owner = Owner.find(crib_params[:owner_id])
     if owner 
-      crib = Cribb.new(crib_params)
-      if crib.save
-        render json: {
-          data: {
-            message: "Crib successfully created",
-            code: 900
-          }
-        }
+      @crib = Cribb.new(crib_params)
+      if @crib.save
+        response.headers['Location'] = api_crib_url(@crib)
+        render :show, status: :created
       end
     end
   end

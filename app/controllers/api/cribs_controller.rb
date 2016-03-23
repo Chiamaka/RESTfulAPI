@@ -20,7 +20,7 @@ class Api::CribsController < ApplicationController
   end
 
   def show
-  	@crib = Cribb.find(params[:id]);
+  	@crib = Cribb.find(params[:id])
   end
 
   def update

@@ -159,7 +159,7 @@ Code for building RESTful APIs in Rails
 }
 ```
 + Success Response
-    + Code: 200
+    + Code: 201
     + Sample Response
 ```json
 {
@@ -238,7 +238,7 @@ Code for building RESTful APIs in Rails
   ##### Required:
     `id=[integer]`
 + Success Response
-    + Code: 200
+    + Code: 202
     + Sample Response
 ```json
 {

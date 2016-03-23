@@ -34,8 +34,37 @@ class Api::TenantsController < ApplicationController
 	end
 
 	def update
-
+		#school = School.find(tenant_params[:school_id])
+		#crib = Cribb.find(tenant_params[:cribb_id])
+		tenant = Tenant.find(params[:id])
+		if tenant.update(tenant_params)
+			render json: {
+				data: {
+					message: "Tenant was successfully updated",
+					code: 900
+				}
+			}
+		end
 	end
+
+	def destroy
+		tenant = Tenant.find(params[:id])
+		if tenant.destroy
+			render json: {
+				data: {
+					message: "Tenant was successfully deleted",
+					code: 900
+				}
+			}
+		else
+			render json: {
+				error: {
+					message: tenant.errors,
+					code: 810
+				}
+			}
+		end
+	end	
 
 	private
 	def tenant_params

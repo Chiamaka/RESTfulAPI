@@ -22,14 +22,9 @@ class Api::CribsController < ApplicationController
   def update
     owner = Owner.find(crib_params[:owner_id])
     if owner
-      crib = Cribb.find(params[:id])
-      if crib.update(crib_params)
-        render json: {
-          data: {
-            message: "Crib successfully updated",
-            code: 900
-          }
-        }
+      @crib = Cribb.find(params[:id])
+      if @crib.update(crib_params)
+        render :show, status: :ok
       end
     end 
   end
@@ -37,12 +32,7 @@ class Api::CribsController < ApplicationController
   def destroy
     crib = Cribb.find(params[:id])
     if crib.destroy
-      render json: {
-        data: {
-          message: "Crib successfully deleted",
-          code: 900
-        }
-      }
+      render json: {}, status: :no_content
     else
       render json: {
         data: {
@@ -56,6 +46,6 @@ class Api::CribsController < ApplicationController
   private
 
   def crib_params
-    params.require(:data).permit(:description, :tenants, :owner_id)
+    params.require(:data).require(:attributes).permit(:description, :tenants, :owner_id) 
   end
 end
